@@ -1,5 +1,9 @@
-import Image from "next/image";
+import SearchBar from "./searchBar";
 
 export default function Home() {
-  return <div className="bg-red-50 p-5">this is the test!</div>;
+  return (
+    <div className="p-5">
+      <SearchBar />
+    </div>
+  );
 }
