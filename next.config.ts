@@ -1,7 +1,12 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  images: {
+    remotePatterns: [
+      new URL("https://flagcdn.com/w320/**"),
+      new URL("https://upload.wikimedia.org/wikipedia/**"),
+    ],
+  },
 };
 
 export default nextConfig;
