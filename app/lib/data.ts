@@ -1,58 +1,56 @@
-import { Country, CountryFromApi, Region } from "@/app/lib/definitions";
+import { CountryDto, Region, Country } from "@/app/lib/definitions";
 
 const baseURL = "https://restcountries.com/v3.1";
+const fields = "name,flags,population,region,capital,cca3";
 
 export async function getCountries() {
-  try {
-    const response = await fetch(
-      baseURL + "/all?fields=name,flags,population,region,capital,cca3"
-    );
-    if (!response.ok) {
-      throw new Error("Failed to fetch");
-    }
-    const data = await response.json();
-    const countries = data.map((country: CountryFromApi) => ({
-      id: country.cca3,
-      name: country.name,
-      region: country.region,
-      capital: country.capital,
-      flagImage: {
-        src: country.flags.png,
-        alt: country.flags.alt,
-      },
-      population: country.population,
-    })) as Country[];
-    return countries;
-  } catch (error) {
-    console.error("Error:", error);
-  }
+  const response = await fetch(`${baseURL}/all?fields=${fields}`);
+  if (!response.ok)
+    throw new Error(`Failed to get countries: ${response.statusText}`);
+
+  const data: CountryDto[] = await response.json();
+  return data.map(CountryFromDto);
 }
 
 export async function getCountriesByRegion(region: Region) {
-  try {
-    const response = await fetch(
-      baseURL +
-        "/region/" +
-        region.toLowerCase() +
-        "?fields=name,region,flags,population,capital,cca3"
+  const response = await fetch(
+    `${baseURL}/region/${region.toLowerCase()}?fields=${fields}`,
+  );
+
+  if (!response.ok)
+    throw new Error(
+      `Failed to get countries by region: ${response.statusText}`,
     );
-    if (!response.ok) {
-      throw new Error("Failed to fetch");
-    }
-    const data = await response.json();
-    const countries = data.map((country: CountryFromApi) => ({
-      id: country.cca3,
-      name: country.name,
-      region: country.region,
-      capital: country.capital,
-      flagImage: {
-        src: country.flags.png,
-        alt: country.flags.alt,
-      },
-      population: country.population,
-    })) as Country[];
-    return countries;
-  } catch (error) {
-    console.error("Error:", error);
-  }
+
+  const data: CountryDto[] = await response.json();
+  return data.map(CountryFromDto);
+}
+
+export async function searchCountriesByName(name: string) {
+  const response = await fetch(
+    `${baseURL}/name/${name.trim()}?fields=${fields}`,
+  );
+
+  if (response.status === 404) return [];
+  if (!response.ok)
+    throw new Error(
+      `Failed to search countries by name: ${response.statusText}`,
+    );
+
+  const data: CountryDto[] = await response.json();
+  return data.map(CountryFromDto);
+}
+
+function CountryFromDto(dto: CountryDto): Country {
+  return {
+    id: dto.cca3,
+    name: dto.name,
+    flagImage: {
+      src: dto.flags.png,
+      alt: dto.flags.alt,
+    },
+    population: dto.population,
+    region: dto.region as Region,
+    capital: dto.capital,
+  };
 }

@@ -1,4 +1,4 @@
-export interface CountryFromApi {
+export interface CountryDto {
   name: Name;
   flags: { png: string; svg: string; alt: string };
   population: number;
