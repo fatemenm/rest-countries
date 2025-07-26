@@ -19,7 +19,7 @@ export default function FilterSelect({
     <div className="relative w-4/6">
       <button
         onClick={() => setIsOpen((prev: boolean) => !prev)}
-        className="flex justify-between p-4 rounded-md bg-white shadow-md w-full"
+        className="flex w-full justify-between rounded-md bg-white p-4 shadow-md"
       >
         <span>{selectedRegion ?? "Filter by Region"}</span>
         {isOpen ? <ChevronUp color="gray" /> : <ChevronDown color="gray" />}
@@ -27,12 +27,12 @@ export default function FilterSelect({
       <ul
         className={
           isOpen
-            ? "block absolute z-10 bg-white shadow-md rounded-md p-4 w-full top-16"
+            ? "absolute top-16 z-10 block w-full bg-white shadow-md"
             : "hidden"
         }
       >
         {Object.values(Region).map((region) => (
-          <li className="py-1" key={region}>
+          <li className="bg-white px-4 py-2 hover:bg-gray-200" key={region}>
             <button
               onClick={() => {
                 onChangeRegion(region);
