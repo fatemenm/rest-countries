@@ -16,24 +16,28 @@ export default function FilterSelect({
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   return (
-    <div className="relative w-4/6">
+    <div className="text-very-dark-blue dark:bg-dark-blue relative h-14 w-4/6 rounded-md bg-white md:w-2/6 xl:w-2/12 dark:text-white">
       <button
         onClick={() => setIsOpen((prev: boolean) => !prev)}
-        className="flex w-full justify-between rounded-md bg-white p-4 shadow-md"
+        className="flex h-full w-full justify-between rounded-md p-4 shadow-md"
       >
         <span>{selectedRegion ?? "Filter by Region"}</span>
-        {isOpen ? <ChevronUp color="gray" /> : <ChevronDown color="gray" />}
+        {isOpen ? <ChevronDown /> : <ChevronUp />}
       </button>
       <ul
         className={
           isOpen
-            ? "absolute top-16 z-10 block w-full bg-white shadow-md"
+            ? "text-very-dark-blue dark:bg-dark-blue absolute top-16 z-10 block w-full rounded-md bg-white shadow-md dark:text-white"
             : "hidden"
         }
       >
-        {Object.values(Region).map((region) => (
-          <li className="bg-white px-4 py-2 hover:bg-gray-200" key={region}>
+        {Object.values(Region).map((region, index, array) => (
+          <li
+            className={`px-4 py-1.5 ${index === 0 && "rounded-tl-md rounded-tr-md pt-4"} ${index === array.length - 1 && "rounded-br-md rounded-bl-md pb-4"}`}
+            key={region}
+          >
             <button
+              className="w-full text-left"
               onClick={() => {
                 onChangeRegion(region);
                 setIsOpen((prev: boolean) => !prev);

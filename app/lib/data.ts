@@ -57,7 +57,7 @@ function CountryFromDto(dto: CountryDto): Country {
     id: dto.cca3,
     name: dto.name,
     flagImage: {
-      src: dto.flags.png,
+      src: dto.flags.svg,
       alt: dto.flags.alt,
     },
     population: dto.population,

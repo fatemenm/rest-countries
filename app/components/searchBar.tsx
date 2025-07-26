@@ -1,7 +1,7 @@
 "use client";
 
 import { Search } from "lucide-react";
-import UseDebounce from "../lib/useDebounce";
+import UseDebounce from "@/app/lib/useDebounce";
 
 type SearchBarProps = {
   onSubmit: (value: string) => void;
@@ -24,12 +24,12 @@ export default function SearchBar({
   };
 
   return (
-    <div className="flex h-16 items-center gap-4 rounded-md bg-white px-4 shadow-md">
-      <Search className="h-full text-gray-400 hover:text-gray-900" />
+    <div className="dark:bg-dark-blue text-dark-gray flex h-14 items-center gap-4 rounded-md bg-white px-4 shadow-md md:w-3/6 xl:w-4/12 dark:text-white">
+      <Search className="h-full" />
       <input
         onChange={onChangeWrapper}
         value={query}
-        className="h-full w-full focus:outline-none"
+        className="placeholder-dark-gray text-very-dark-blue dark:placeholder-very-light-gray h-full w-full focus:outline-none dark:text-white"
         type="search"
         placeholder="Search for a country..."
       />

@@ -1,3 +1,5 @@
+"uses client";
+
 import Image from "next/image";
 import { Country } from "../lib/definitions";
 import Link from "next/link";
@@ -6,22 +8,31 @@ export function CountryCard({ country }: { country: Country }) {
   return (
     <Link
       href={`/country/${country.id}`}
-      className="flex flex-col rounded-lg bg-white p-4 shadow-md"
+      className="text-very-dark-blue dark:bg-dark-blue flex w-full flex-col rounded-md bg-white shadow-md dark:text-white"
     >
-      <div className="relative h-32 w-full rounded-t-lg">
+      <div className="relative aspect-[5/3] w-full rounded-t-md">
         <Image
           src={country.flagImage.src}
           alt={country.flagImage.alt}
           fill
-          className="object-cover"
+          className="rounded-t-md object-cover"
         />
       </div>
-      <div className="flex flex-col p-8">
-        <h2>{country.name.common}</h2>
-        <ul className="gap-8s flex flex-col">
-          <li className="text-gray-600">Population: {country.population}</li>
-          <li className="text-gray-600">Region: {country.region}</li>
-          <li className="text-gray-600">Capital: {country.capital}</li>
+      <div className="flex flex-col gap-3 px-6 py-8">
+        <h2 className="text-xl font-bold">{country.name.common}</h2>
+        <ul className="flex flex-col gap-1">
+          <li>
+            <span className="mr-1 font-semibold">Population:</span>
+            <span>{country.population.toLocaleString("en-US")}</span>
+          </li>
+          <li>
+            <span className="mr-1 font-semibold">Region:</span>
+            <span>{country.region}</span>
+          </li>
+          <li>
+            <span className="mr-1 font-semibold">Capital:</span>
+            <span>{country.capital}</span>
+          </li>
         </ul>
       </div>
     </Link>

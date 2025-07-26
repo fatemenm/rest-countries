@@ -50,19 +50,24 @@ export default function Home() {
     });
   }, []);
 
-  if (!countries) return <div>data is not available</div>;
+  if (!countries)
+    return (
+      <div className="mt-10 flex justify-center">data is not available</div>
+    );
 
   return (
-    <div className="flex flex-col gap-10 p-5">
-      <SearchBar
-        query={searchQuery}
-        onSubmit={handleSearchSubmit}
-        onChange={handleSearchQueryChange}
-      />
-      <FilterSelect
-        selectedRegion={selectedRegion}
-        onChangeRegion={handleChangeRegion}
-      />
+    <div className="my-6 flex w-full flex-col gap-8 px-4 text-sm md:mx-auto md:w-11/12 md:px-0 xl:my-12 xl:gap-12">
+      <div className="md:gap-auto xl:gap-auto flex flex-col justify-between gap-8 md:flex-row">
+        <SearchBar
+          query={searchQuery}
+          onSubmit={handleSearchSubmit}
+          onChange={handleSearchQueryChange}
+        />
+        <FilterSelect
+          selectedRegion={selectedRegion}
+          onChangeRegion={handleChangeRegion}
+        />
+      </div>
       {countries.length === 0 && searchQuery ? (
         <div>{`No country found for: "${searchQuery}"`}</div>
       ) : (
