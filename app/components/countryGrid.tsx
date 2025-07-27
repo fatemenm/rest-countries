@@ -1,5 +1,3 @@
-"use client";
-
 import { Country } from "@/app/lib/definitions";
 import { CountryCard } from "@/app/components/countryCard";
 
