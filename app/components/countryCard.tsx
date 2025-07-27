@@ -1,7 +1,7 @@
 "uses client";
 
 import Image from "next/image";
-import { Country } from "../lib/definitions";
+import { Country } from "@/app/lib/definitions";
 import Link from "next/link";
 
 export function CountryCard({ country }: { country: Country }) {
