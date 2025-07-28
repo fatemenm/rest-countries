@@ -5,6 +5,7 @@ import { CountryGrid } from "@/app/components/countryGrid";
 import { useState } from "react";
 import FilterSelect from "@/app/components/filterSelect";
 import SearchBar from "@/app/components/searchBar";
+import { getCountriesByRegion, searchCountriesByName } from "@/app/lib/data";
 
 export default function CountryExplorer({
   initialCountries,
@@ -20,9 +21,9 @@ export default function CountryExplorer({
   function handleChangeRegion(region: Region) {
     setSelectedRegion(region);
     setSearchQuery("");
-    setCountries(
-      initialCountries.filter((country) => country.region === region),
-    );
+    getCountriesByRegion(region).then((countries) => {
+      setCountries(countries);
+    });
   }
 
   function handleSearchQueryChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -33,12 +34,9 @@ export default function CountryExplorer({
     setSearchQuery(query);
     if (query) {
       setSelectedRegion(undefined);
-      const filteredCountries = initialCountries.filter((country) =>
-        country.name.common
-          .toLocaleLowerCase()
-          .includes(query.toLocaleLowerCase()),
-      );
-      setCountries(filteredCountries);
+      searchCountriesByName(query).then((countries) => {
+        setCountries(countries);
+      });
     } else {
       setCountries(initialCountries);
     }
