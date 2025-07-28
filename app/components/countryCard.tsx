@@ -1,6 +1,6 @@
 import { Country } from "@/app/lib/definitions";
 import Link from "next/link";
-import FlagImage from "@/app/components/FlagImage";
+import FlagImage from "@/app/components/flagImage";
 
 export function CountryCard({ country }: { country: Country }) {
   return (

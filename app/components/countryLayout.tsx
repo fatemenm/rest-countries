@@ -1,5 +1,5 @@
 import { Country } from "@/app/lib/definitions";
-import FlagImage from "@/app/components/FlagImage";
+import FlagImage from "@/app/components/flagImage";
 import BorderCountryList from "@/app/components/borderCountryList";
 
 import CountryDetails from "./countryDetails";
