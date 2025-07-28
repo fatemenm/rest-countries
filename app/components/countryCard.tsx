@@ -1,8 +1,6 @@
-"uses client";
-
-import Image from "next/image";
 import { Country } from "@/app/lib/definitions";
 import Link from "next/link";
+import FlagImage from "@/app/components/FlagImage";
 
 export function CountryCard({ country }: { country: Country }) {
   return (
@@ -10,14 +8,12 @@ export function CountryCard({ country }: { country: Country }) {
       href={`/country/${country.id}`}
       className="text-very-dark-blue dark:bg-dark-blue flex w-full flex-col rounded-md bg-white shadow-md dark:text-white"
     >
-      <div className="relative aspect-[5/3] w-full rounded-t-md">
-        <Image
-          src={country.flagImage.src}
-          alt={country.flagImage.alt}
-          fill
-          className="rounded-t-md object-cover"
-        />
-      </div>
+      <FlagImage
+        containerClass="rounded-t-md"
+        src={country.flagImage.src}
+        alt={country.flagImage.alt}
+        imageClass="rounded-t-md object-cover"
+      />
       <div className="flex flex-col gap-3 px-6 py-8">
         <h2 className="text-xl font-bold">{country.name.common}</h2>
         <ul className="flex flex-col gap-1">

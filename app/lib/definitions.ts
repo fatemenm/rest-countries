@@ -7,7 +7,7 @@ export interface CountryDto {
   cca3: string;
   subregion?: string;
   tld?: string[];
-  currencies?: Record<string, { name: string; symbol: string }>;
+  currencies?: Currencies;
   languages?: Record<string, string>;
   borders?: string[];
 }
@@ -21,16 +21,19 @@ export interface Country {
   capital: string[];
   subregion?: string;
   tld?: string[];
-  currencies?: Record<string, { name: string; symbol: string }>;
+  currencies?: Currencies;
   languages?: Record<string, string>;
   borderIds?: string[];
 }
 
+export type Currencies = Record<string, { name: string; symbol: string }>;
+
 export interface Name {
   common: string;
   official: string;
-  nativeName: Record<string, { official: string; common: string }>;
+  nativeName: NativeName;
 }
+export type NativeName = Record<string, { official: string; common: string }>;
 
 export interface FlagImage {
   src: string;
